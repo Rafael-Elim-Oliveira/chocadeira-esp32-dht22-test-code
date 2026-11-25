@@ -1,0 +1,1 @@
+# chocadeira-esp32-dht22-teste-code
