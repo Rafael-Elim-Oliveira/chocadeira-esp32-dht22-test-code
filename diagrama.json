@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "author": "Equipe Chocadeira Aviaria",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -115,
+      "left": 165,
+      "attrs": {
+        "temperature": "37.8",
+        "humidity": "60"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_aquecedor",
+      "top": 20,
+      "left": 210,
+      "attrs": {
+        "color": "red",
+        "label": "Aquecedor (GPIO 18)"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_aquecedor",
+      "top": 85,
+      "left": 160,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_resfriador",
+      "top": 120,
+      "left": 210,
+      "attrs": {
+        "color": "blue",
+        "label": "Resfriador (GPIO 19)"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_resfriador",
+      "top": 185,
+      "left": 160,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "sw_nobreak",
+      "top": 230,
+      "left": 165,
+      "attrs": {
+        "label": "Rede Eletrica (GPIO 21)"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v0" ] ],
+    [ "esp:18", "r_aquecedor:1", "orange", [ "h0" ] ],
+    [ "r_aquecedor:2", "led_aquecedor:A", "orange", [ "h0" ] ],
+    [ "led_aquecedor:C", "esp:GND.2", "black", [ "h0" ] ],
+    [ "esp:19", "r_resfriador:1", "cyan", [ "h0" ] ],
+    [ "r_resfriador:2", "led_resfriador:A", "cyan", [ "h0" ] ],
+    [ "led_resfriador:C", "esp:GND.2", "black", [ "h0" ] ],
+    [ "sw_nobreak:1", "esp:GND.3", "black", [ "v0" ] ],
+    [ "sw_nobreak:2", "esp:21", "purple", [ "v0" ] ],
+    [ "sw_nobreak:3", "esp:3V3", "red", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
